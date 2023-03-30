@@ -1,0 +1,29 @@
+Using resources listed and through more research I would like to create an IDPS that detects, alerts, 
+and blocks specific files as well as blocks access from certain websites on the internet. 
+I will use the SEED Ubnuntu VM to emulate a computer being connected to a network that has such security measures in place. 
+
+Software Utilized
+Oracale VM SEED Unbuntu
+Snort Open Source IDPS
+
+Snort Rules Resources
+https://docs.snort.org/rules/headers/file_rules 
+https://docs.snort.org/rules/headers/file_id_rules
+https://www.informit.com/articles/article.aspx?p=101171&seqNum=7
+https://stackoverflow.com/questions/40401313/snort-website-block-rule
+https://github.com/snort3/snort3/issues/224
+https://docs.trellix.com/bundle/network-security-platform-9.2.x-product-guide/page/GUID-B82AD903-7765-4219-8741-08A4E97BF0DA.html
+https://www.ijera.com/papers/Vol2_issue2/HK2212881296.pdf
+
+
+Websites to block possible-
+NSFW websites
+TikTok
+4Chan
+WikiLeaks
+AntiSemetic websites https://en.wikipedia.org/wiki/Category:Neo-Nazi_websites
+https://en.wikipedia.org/wiki/Stormfront_(website)
+The daily stormer https://securitytrails.com/blog/the-most-censored-racist-website 
+https://academicworks.cuny.edu/hc_pubs/271/
+https://abc7news.com/news/racist-website-called-murder-capital-of-the-internet/29838/
+https://www.cnn.com/2019/08/06/us/white-supremacist-hate-sites-8chan-soh/index.html
