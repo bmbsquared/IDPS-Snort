@@ -1,0 +1,64 @@
+# $Id: local.rules,v 1.11 2004/07/23 20:15:44 bmc Exp $
+# ----------------
+# LOCAL RULES
+# ----------------
+# This file intentionally does not come with signatures.  Put you$
+# additions here.
+#Category Based Content Filtering
+#Alert for traffic to pornographic content
+
+alert tcp any any -> any any(msg:"Pornographic content is blocked"; content:"GET";http_uri;pcre:"/porn|xxx|adult|sex|sexy|NSFW|MILF)/i";classtype:policy-violation;sid:1000001; rev:1;)
+
+#Block traffic to pornographic content
+
+reject tcp any any -> any any(msg:"Pornographic content is blocked";content:"GET";http_uri;pcre:"/(porn|xxx|adult|sex|sexy|NSFW|MILF)/i";classtype:policy-violation;sid:1000002; rev:1;)
+
+#Alert for traffic to gambling websites
+
+alert tcp any any -> any any(msg:"Gambling content is blocked";content:"GET";http_uri;pcre:"/(gambling|casino|poker|sportsbetting|sportsbook|lottery|betting|parlay)/Ui";classtype:policy-violation;sid:1000003;rev:1;)
+
+#Block traffic to gambling websites
+
+reject tcp any any -> any any(msg:"Gambling content is blocked";content:"GET";http_uri;pcre:"/(gambling|casino|poker|sportsbetting|sportsbook|lottery|betting|parlay)/Ui";classtype:policy-violation;sid:1000004;rev:1;)
+
+#URL Specific Content Filtering
+
+#Alert for traffic to known fraudulent online shopping scams
+
+alerp tcp any any -> any any(msg:"This is a fraudulent site posing as Michael Kors" ;tls_sni:"michaelkors-handbags.com";content:"GET"; classtype:policy-violation; sid:1000005; rev:1;)
+
+alert tcp any any -> any any(msg:"This is a fraudulent site posing as Tiffany&Co";tls_sni:"tiffanycoshop.com";content:"GET"; classtype:policy-violation; sid:1000006; rev:1;)
+
+
+#Block traffic to known fraudulent online shopping scams
+
+reject tcp any any -> any any(msg:"This is a fraudulent site posing as Michael Kors" ;tls_sni:"michaelkors-handbags.com";content:"GET"; classtype:policy-violation; sid:1000007; 
+
+reject tcp any any -> any any(msg:"This is a fraudulent site posing as Tiffany&Co";tls_sni:"tiffanycoshop.com";content:"GET"; classtype:policy-violation; sid:1000008; rev:1;)
+
+#Alert for traffic to known NeoNazi websites
+
+alert tcp any any -> any any(msg:"The Vanguard News Network is a known NeoNazi website"; content:"GET"; tls_sni:"vnnforum.com"; classtype:policy-violation; sid:1000009; rev:1;)
+
+alert tcp any any -> any any(msg:"The Daily Stormer is a known NeoNazi website"; content:"GET"; tls_sni:"dailystormer.in"; classtype:policy-violation; sid:1000009; rev:1;)
+
+alert tcp any any -> any any(msg:"8Chan is a known NeoNazi website"; content:"GET"; tls_sni:"8ch.net"; classtype:policy-violation; sid:1000010; rev:1;)
+
+#Block traffic to known NeoNazi websites
+
+reject tcp any any -> any any(msg:"The Vanguard News Network is a known NeoNazi website"; content:"GET"; tls_sni:"vnnforum.com"; classtype:policy-violation; sid:1000011; rev:1;)
+
+reject tcp any any -> any any(msg:"The Daily Stormer is a known NeoNazi website"; content:"GET"; tls_sni:"dailystormer.in"; classtype:policy-violation; sid:1000012; rev:1;)
+
+reject tcp any any -> any any(msg:"8Chan is a known NeoNazi website"; content:"GET"; tls_sni:"8ch.net"; classtype:policy-violation; sid:1000013; rev:1;)
+
+#Alert traffic to known cryptocurrency scams
+
+alert any any -> any any(msg:"ZC Exchange is a fraudulent cryptoccurrency trading platform"; content:"GET"; tls_sni:"FTXbuy666.com|Zcorg01.com"; classtype:policy-violation; sid:1000014; rev:1;)
+
+alert any any -> any any(msg:"Sun Bit Proa is a fraudulent cryptocurrency trading platform"; content:"GET"; tls_sni:"sunbitproa.com"; classtype:policy-violation; sid:1000015; rev:1;)
+
+#Block traffic to known cryptocurrency scams
+reject any any -> any any(msg:"ZC Exchange is a fraudulent cryptocurrency trading platform"; content:"GET"; tls_sni:"FTXbuy666.com|Zcorg01.com"; classtype:policy-violation; sid:1000016; rev:1;)
+
+reject any any -> any any(msg:"Sun Bit Proa is a fraudulent cryptocurrency trading platform"; content:"GET"; tls_sni:"sunbitproa.com"; classtype:policy-violation; sid:1000017; rev:1;)
